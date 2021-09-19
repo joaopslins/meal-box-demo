@@ -1,0 +1,109 @@
+{
+  "categories": {
+    "data": [
+      {
+        "id": 1,
+        "name": "Breakfast",
+        "meals": [
+          {
+            "id": 1,
+            "name": "Toast w/ Jelly",
+            "image": "https://via.placeholder.com/200"
+          },
+          {
+            "id": 2,
+            "name": "Pancakes",
+            "image": "https://via.placeholder.com/200"
+          },
+          {
+            "id": 3,
+            "name": "Bacon & Eggs",
+            "image": "https://via.placeholder.com/200"
+          },
+          {
+            "id": 4,
+            "name": "Waffles",
+            "image": "https://via.placeholder.com/200"
+          },
+          {
+            "id": 5,
+            "name": "Sandwich",
+            "image": "https://via.placeholder.com/200"
+          },
+          {
+            "id": 10,
+            "name": "Onigiri",
+            "image": "https://via.placeholder.com/200"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Lunch",
+        "meals": [
+          {
+            "id": 5,
+            "name": "Sandwich",
+            "image": "https://via.placeholder.com/200"
+          },
+          {
+            "id": 6,
+            "name": "Caesar Salad",
+            "image": "https://via.placeholder.com/200"
+          },
+          {
+            "id": 7,
+            "name": "Pizza",
+            "image": "https://via.placeholder.com/200"
+          },
+          {
+            "id": 8,
+            "name": "Taco",
+            "image": "https://via.placeholder.com/200"
+          },
+          {
+            "id": 11,
+            "name": "Steak w/ Fries",
+            "image": "https://via.placeholder.com/200"
+          },
+          {
+            "id": 13,
+            "name": "Carbonara Pasta",
+            "image": "https://via.placeholder.com/200"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Dinner",
+        "meals": [
+          {
+            "id": 7,
+            "name": "Pizza",
+            "image": "https://via.placeholder.com/200"
+          },
+          {
+            "id": 9,
+            "name": "Hamburger",
+            "image": "https://via.placeholder.com/200"
+          },
+          {
+            "id": 10,
+            "name": "Onigiri",
+            "image": "https://via.placeholder.com/200"
+          },
+          {
+            "id": 12,
+            "name": "Chicken Wings",
+            "image": "https://via.placeholder.com/200"
+          },
+          {
+            "id": 14,
+            "name": "Ramen",
+            "image": "https://via.placeholder.com/200"
+          }
+        ]
+      }
+    ]
+  }
+}
