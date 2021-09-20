@@ -1,11 +1,28 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { Category, Meal } from "../types";
+import { normalize } from "normalizr";
+import { categorySchema } from "../schemas";
 
 export interface State {
-  categories: [];
+  entities: {
+    categories: {
+      [id: number]: Category;
+    };
+    meals: {
+      [id: number]: Meal;
+    };
+  };
+  ui: {
+    categories?: [number];
+  };
 }
 
 const initialState: State = {
-  categories: []
+  entities: {
+    categories: {},
+    meals: {}
+  },
+  ui: {}
 };
 
 export const fetchCategories = createAsyncThunk(
@@ -22,7 +39,12 @@ export const slice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder.addCase(fetchCategories.fulfilled, (state, action) => {
-      state.categories = action.payload;
+      const { entities, result } = normalize(action.payload.data, [
+        categorySchema
+      ]);
+      // @ts-ignore
+      state.entities = { ...entities };
+      state.ui.categories = result;
     });
   }
 });
