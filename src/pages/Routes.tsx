@@ -13,7 +13,7 @@ const Routes = () => {
   }, []);
 
   return (
-    <Route path="/">
+    <Route path="/" exact>
       <MealListPage />
     </Route>
   );
