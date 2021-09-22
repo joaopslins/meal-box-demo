@@ -1,7 +1,7 @@
 import React from "react";
 import Providers from "./Providers";
 import { Switch } from "react-router-dom";
-import Routes from "./Routes";
+import Routes from "./pages/Routes";
 
 const App = () => (
   <Providers>

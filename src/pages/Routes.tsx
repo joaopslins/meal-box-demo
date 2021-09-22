@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
-import MealListPage from "./pages/MealListPage";
+import MealListPage from "./MealListPage";
 import { Route } from "react-router-dom";
-import { useAppDispatch } from "./redux/hooks";
-import { fetchCategories } from "./redux/slice";
+import { useAppDispatch } from "../redux/hooks";
+import { fetchCategories, fetchPlan } from "../redux/slice";
 
 const Routes = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchCategories());
+    dispatch(fetchPlan());
   }, []);
 
   return (
