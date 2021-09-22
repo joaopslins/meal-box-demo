@@ -2,6 +2,7 @@ import React from "react";
 import { useAppSelector } from "../redux/hooks";
 import { getMealById } from "../redux/selectors";
 import styled from "styled-components";
+import MealButtons from "./MealButtons";
 
 const Card = styled.div`
   border: 1px solid red;
@@ -19,10 +20,12 @@ const CardImage = styled.div<{
 
 const MealCard = ({ id }: { id: number }) => {
   const meal = useAppSelector(state => getMealById(state, id));
+
   return (
     <Card>
       <CardImage url={meal.image} />
       <div>{meal.name}</div>
+      <MealButtons mealId={id} />
     </Card>
   );
 };

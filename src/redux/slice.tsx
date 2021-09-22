@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Category, CategoryAPI, Meal, MyPlanAPI } from "../types";
 import { normalize } from "normalizr";
 import { categorySchema } from "../schemas";
@@ -14,7 +14,7 @@ export interface State {
   };
   ui: {
     categories?: number[];
-    box?: {
+    box: {
       [categoryId: number]: number[];
     };
   };
@@ -28,7 +28,9 @@ const initialState: State = {
     categories: {},
     meals: {}
   },
-  ui: {},
+  ui: {
+    box: {}
+  },
   plan: []
 };
 
@@ -48,10 +50,25 @@ export const fetchPlan = createAsyncThunk<MyPlanAPI>(
   }
 );
 
+interface MealActionPayload {
+  mealId: number;
+  categoryId: number;
+}
+
 export const slice = createSlice({
   name: "state",
   initialState,
-  reducers: {},
+  reducers: {
+    incrementMeal: (state, action: PayloadAction<MealActionPayload>) => {
+      state.ui.box[action.payload.categoryId].push(action.payload.mealId);
+    },
+    decrementMeal: (state, action: PayloadAction<MealActionPayload>) => {
+      const firstIndex = state.ui.box[action.payload.categoryId].indexOf(
+        action.payload.mealId
+      );
+      state.ui.box[action.payload.categoryId].splice(firstIndex, 1);
+    }
+  },
   extraReducers: builder => {
     builder.addCase(fetchCategories.fulfilled, (state, action) => {
       const { entities, result } = normalize(action.payload.data, [
@@ -63,12 +80,20 @@ export const slice = createSlice({
     });
     builder.addCase(fetchPlan.fulfilled, (state, action) => {
       state.plan = action.payload.data;
+
+      const box: { [categoryId: number]: [] } = {};
+
+      action.payload.data.forEach(plan => {
+        box[plan.category] = [];
+      });
+
+      state.ui.box = box;
     });
   }
 });
 
 // Action creators are generated for each case reducer function
-// export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const { incrementMeal, decrementMeal } = slice.actions;
 // Define a thunk that dispatches those action creators
 
 export default slice.reducer;
