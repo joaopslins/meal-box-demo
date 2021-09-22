@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppSelector } from "../redux/hooks";
-import { getMealById } from "../redux/selectors";
+import { selectMealById } from "../redux/selectors";
 import styled from "styled-components";
 import MealButtons from "./MealButtons";
 
@@ -19,7 +19,7 @@ const CardImage = styled.div<{
 `;
 
 const MealCard = ({ id }: { id: number }) => {
-  const meal = useAppSelector(state => getMealById(state, id));
+  const meal = useAppSelector(state => selectMealById(state, id));
 
   return (
     <Card>

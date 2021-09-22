@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppSelector } from "../redux/hooks";
-import { getCategoryById } from "../redux/selectors";
+import { selectCategoryById } from "../redux/selectors";
 import styled from "styled-components";
 import MealsList from "./MealsList";
 import { CategoryContext } from "../redux/categoryContext";
@@ -13,7 +13,7 @@ const Container = styled.div`
 `;
 
 const CategorySection = ({ id }: { id: number }) => {
-  const category = useAppSelector(state => getCategoryById(state, id));
+  const category = useAppSelector(state => selectCategoryById(state, id));
 
   return (
     <CategoryContext.Provider value={id}>

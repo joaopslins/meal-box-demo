@@ -66,6 +66,9 @@ export const slice = createSlice({
       const firstIndex = state.ui.box[action.payload.categoryId].indexOf(
         action.payload.mealId
       );
+
+      if (firstIndex === -1) return;
+
       state.ui.box[action.payload.categoryId].splice(firstIndex, 1);
     }
   },

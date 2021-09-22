@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useMealActions } from "../redux/hooks";
+import { useMealActions, useMealInfo } from "../redux/hooks";
 
 const Container = styled.div`
   display: flex;
@@ -20,12 +20,13 @@ interface Props {
 }
 
 const MealButtons = ({ mealId }: Props) => {
+  const { count } = useMealInfo(mealId);
   const { addMeal, removeMeal } = useMealActions(mealId);
 
   return (
     <Container>
       <button onClick={() => removeMeal()}>-</button>
-      <Counter>0</Counter>
+      <Counter>{count}</Counter>
       <button onClick={() => addMeal()}>+</button>
     </Container>
   );
