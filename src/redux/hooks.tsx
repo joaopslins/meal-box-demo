@@ -41,7 +41,7 @@ export const useMealInfo = (mealId: number) => {
   const categoryId = useCategoryContext();
 
   const count = useAppSelector(state =>
-    selectMealQuantityByCategory(state, categoryId ?? 0, mealId)
+    selectMealQuantityByCategory(state, { categoryId: categoryId ?? 0, mealId })
   );
 
   return { count };
