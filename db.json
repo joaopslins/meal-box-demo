@@ -105,5 +105,21 @@
         ]
       }
     ]
+  },
+  "myPlan": {
+    "data": [
+      {
+        "category": 1,
+        "quantity": 3
+      },
+      {
+        "category": 2,
+        "quantity": 5
+      },
+      {
+        "category": 3,
+        "quantity": 4
+      }
+    ]
   }
 }

@@ -14,6 +14,12 @@ export interface State {
   };
   ui: {
     categories?: [number];
+    box?: {
+      [categoryId: number]: [number];
+    };
+  };
+  plan: {
+    [categoryId: number]: number;
   };
 }
 
@@ -22,7 +28,8 @@ const initialState: State = {
     categories: {},
     meals: {}
   },
-  ui: {}
+  ui: {},
+  plan: {}
 };
 
 export const fetchCategories = createAsyncThunk(
@@ -32,6 +39,11 @@ export const fetchCategories = createAsyncThunk(
     return await response.json();
   }
 );
+
+export const fetchPlan = createAsyncThunk("myPlan/fetch", async thunkAPI => {
+  const response = await fetch("http://localhost:3004/myPlan");
+  return await response.json();
+});
 
 export const slice = createSlice({
   name: "state",
@@ -45,6 +57,9 @@ export const slice = createSlice({
       // @ts-ignore
       state.entities = { ...entities };
       state.ui.categories = result;
+    });
+    builder.addCase(fetchPlan.fulfilled, (state, action) => {
+      state.plan = action.payload.data;
     });
   }
 });
