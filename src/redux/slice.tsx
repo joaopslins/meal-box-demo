@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Category, Meal } from "../types";
+import { Category, CategoryAPI, Meal, MyPlanAPI } from "../types";
 import { normalize } from "normalizr";
 import { categorySchema } from "../schemas";
 
@@ -13,14 +13,14 @@ export interface State {
     };
   };
   ui: {
-    categories?: [number];
+    categories?: number[];
     box?: {
-      [categoryId: number]: [number];
+      [categoryId: number]: number[];
     };
   };
   plan: {
     [categoryId: number]: number;
-  };
+  }[];
 }
 
 const initialState: State = {
@@ -29,10 +29,10 @@ const initialState: State = {
     meals: {}
   },
   ui: {},
-  plan: {}
+  plan: []
 };
 
-export const fetchCategories = createAsyncThunk(
+export const fetchCategories = createAsyncThunk<CategoryAPI>(
   "categories/fetchAll",
   async thunkAPI => {
     const response = await fetch("http://localhost:3004/categories");
@@ -40,10 +40,13 @@ export const fetchCategories = createAsyncThunk(
   }
 );
 
-export const fetchPlan = createAsyncThunk("myPlan/fetch", async thunkAPI => {
-  const response = await fetch("http://localhost:3004/myPlan");
-  return await response.json();
-});
+export const fetchPlan = createAsyncThunk<MyPlanAPI>(
+  "myPlan/fetch",
+  async thunkAPI => {
+    const response = await fetch("http://localhost:3004/myPlan");
+    return await response.json();
+  }
+);
 
 export const slice = createSlice({
   name: "state",
