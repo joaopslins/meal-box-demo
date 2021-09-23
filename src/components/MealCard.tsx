@@ -3,6 +3,7 @@ import { useAppSelector } from "../redux/hooks";
 import { selectMealById } from "../redux/selectors";
 import styled from "styled-components";
 import MealButtons from "./MealButtons";
+import Image from "./Image";
 
 const Card = styled.div`
   border: 1px solid red;
@@ -23,7 +24,7 @@ const MealCard = ({ id }: { id: number }) => {
 
   return (
     <Card>
-      <CardImage url={meal.image} />
+      <Image size={120} url={meal.image} />
       <div>{meal.name}</div>
       <MealButtons mealId={id} />
     </Card>
