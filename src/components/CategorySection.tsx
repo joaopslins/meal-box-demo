@@ -2,14 +2,20 @@ import React from "react";
 import { useAppSelector } from "../redux/hooks";
 import { selectCategoryById } from "../redux/selectors";
 import styled from "styled-components";
-import MealsList from "./MealsList";
 import { CategoryContext } from "../redux/categoryContext";
+import MealCard from "./MealCard";
 
 const Container = styled.div`
   border: 1px solid black;
   padding: 8px;
 
   margin: 16px;
+`;
+
+const MealListContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 `;
 
 const CategorySection = ({ id }: { id: number }) => {
@@ -19,7 +25,11 @@ const CategorySection = ({ id }: { id: number }) => {
     <CategoryContext.Provider value={id}>
       <Container>
         <div>Name: {category.name}</div>
-        <MealsList meals={category.meals} />
+        <MealListContainer>
+          {category.meals.map(mealId => (
+            <MealCard key={mealId} id={mealId} />
+          ))}
+        </MealListContainer>
       </Container>
     </CategoryContext.Provider>
   );
