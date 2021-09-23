@@ -1,6 +1,9 @@
 import React from "react";
 import { useAppSelector } from "../redux/hooks";
-import { selectCategoryById } from "../redux/selectors";
+import {
+  selectCategoryById,
+  selectUniqueMealsByCategory
+} from "../redux/selectors";
 import { CategoryContext } from "../redux/categoryContext";
 import styled from "styled-components";
 import WidgetMeal from "./WidgetMeal";
@@ -15,12 +18,15 @@ const Container = styled.div`
 
 const WidgetCategory = ({ id }: Props) => {
   const category = useAppSelector(state => selectCategoryById(state, id));
+  const meals = useAppSelector(state =>
+    selectUniqueMealsByCategory(state, { categoryId: id })
+  );
 
   return (
     <CategoryContext.Provider value={id}>
       <Container>
         <div>{category.name}</div>
-        {category.meals.map(mealId => (
+        {meals.map(mealId => (
           <WidgetMeal key={mealId} id={mealId} />
         ))}
       </Container>
