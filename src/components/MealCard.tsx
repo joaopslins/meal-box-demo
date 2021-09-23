@@ -10,15 +10,6 @@ const Card = styled.div`
   width: 120px;
 `;
 
-const CardImage = styled.div<{
-  url: string;
-}>`
-  background-size: cover;
-  width: 120px;
-  height: 120px;
-  background-image: url(${({ url }) => url});
-`;
-
 const MealCard = ({ id }: { id: number }) => {
   const meal = useAppSelector(state => selectMealById(state, id));
 
