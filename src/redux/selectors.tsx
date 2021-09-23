@@ -11,13 +11,13 @@ export const selectCategoryById = (state: RootState, id: number) =>
 export const selectMealById = (state: RootState, id: number) =>
   state.entities.meals[id];
 
-const selectCategoryOnBox = (state: RootState, options: any) =>
-  state.ui.box[options.categoryId];
+const selectCategoryOnBox = (state: RootState, props: any) =>
+  state.ui.box[props.categoryId];
 
 // Fix memo
 export const selectMealQuantityByCategory = createSelector(
   selectCategoryOnBox,
-  (state, options) => options.mealId,
+  (state, props) => props.mealId,
   (categoryBox, mealId) =>
     categoryBox?.reduce((sum, meal) => (meal === mealId ? sum + 1 : sum), 0) ??
     0
