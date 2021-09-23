@@ -2,7 +2,10 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "./store";
 import { useCategoryContext } from "./categoryContext";
 import { decrementMeal, incrementMeal } from "./slice";
-import { selectMealQuantityByCategory } from "./selectors";
+import {
+  selectAvailableQtyByCategory,
+  selectMealQuantityByCategory
+} from "./selectors";
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch = () => useDispatch<AppDispatch>();
@@ -13,8 +16,6 @@ export const useMealActions = (mealId: number) => {
   const dispatch = useAppDispatch();
 
   const addMeal = () => {
-    if (!categoryId) return;
-
     dispatch(
       incrementMeal({
         mealId,
@@ -24,8 +25,6 @@ export const useMealActions = (mealId: number) => {
   };
 
   const removeMeal = () => {
-    if (!categoryId) return;
-
     dispatch(
       decrementMeal({
         mealId,
@@ -41,8 +40,15 @@ export const useMealInfo = (mealId: number) => {
   const categoryId = useCategoryContext();
 
   const count = useAppSelector(state =>
-    selectMealQuantityByCategory(state, { categoryId: categoryId ?? 0, mealId })
+    selectMealQuantityByCategory(state, { categoryId, mealId })
   );
 
-  return { count };
+  const availableQtyOnCategory = useAppSelector(state =>
+    selectAvailableQtyByCategory(state, { categoryId })
+  );
+
+  const canAdd = availableQtyOnCategory > 0;
+  const canRemove = count > 0;
+
+  return { count, canRemove, canAdd };
 };

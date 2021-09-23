@@ -20,7 +20,7 @@ export interface State {
   };
   plan: {
     [categoryId: number]: number;
-  }[];
+  };
 }
 
 const initialState: State = {
@@ -31,7 +31,7 @@ const initialState: State = {
   ui: {
     box: {}
   },
-  plan: []
+  plan: {}
 };
 
 export const fetchCategories = createAsyncThunk<CategoryAPI>(
@@ -82,7 +82,10 @@ export const slice = createSlice({
       state.ui.categories = result;
     });
     builder.addCase(fetchPlan.fulfilled, (state, action) => {
-      state.plan = action.payload.data;
+      state.plan = action.payload.data.reduce((acc, plan) => {
+        acc[plan.category] = plan.quantity;
+        return acc;
+      }, {} as { [categoryId: number]: number });
 
       const box: { [categoryId: number]: [] } = {};
 

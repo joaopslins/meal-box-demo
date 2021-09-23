@@ -20,14 +20,18 @@ interface Props {
 }
 
 const MealButtons = ({ mealId }: Props) => {
-  const { count } = useMealInfo(mealId);
+  const { count, canAdd, canRemove } = useMealInfo(mealId);
   const { addMeal, removeMeal } = useMealActions(mealId);
 
   return (
     <Container>
-      <button onClick={() => removeMeal()}>-</button>
+      <button disabled={!canRemove} onClick={() => removeMeal()}>
+        -
+      </button>
       <Counter>{count}</Counter>
-      <button onClick={() => addMeal()}>+</button>
+      <button disabled={!canAdd} onClick={() => addMeal()}>
+        +
+      </button>
     </Container>
   );
 };
