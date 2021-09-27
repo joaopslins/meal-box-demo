@@ -27,11 +27,6 @@ const MealListContainer = styled.div`
   gap: 8px;
 `;
 
-const Footer = styled.div`
-  //height: 2px;
-  background-color: ${props => props.theme.colors.primary};
-`;
-
 const CategorySection = ({ id }: { id: number }) => {
   const category = useAppSelector(state => selectCategoryById(state, id));
 
@@ -44,7 +39,6 @@ const CategorySection = ({ id }: { id: number }) => {
             <MealCard key={mealId} id={mealId} />
           ))}
         </MealListContainer>
-        <Footer />
       </Container>
     </CategoryProvider>
   );
