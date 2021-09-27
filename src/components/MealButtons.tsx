@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useMealActions, useMealInfo } from "../redux/hooks";
+import { FaPlus, FaMinus } from "react-icons/fa";
 
 const Container = styled.div`
   display: flex;
@@ -13,6 +14,31 @@ const Counter = styled.div`
 
   display: flex;
   justify-content: center;
+
+  color: ${({ theme }) => theme.colors.secondary600};
+  font-weight: 700;
+`;
+
+const Button = styled.button`
+  height: 24px;
+  width: 24px;
+
+  border: 0;
+  background-color: ${({ theme }) => theme.colors.primary500};
+  color: #222222;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.primary400};
+  }
+
+  &:disabled {
+    background-color: silver;
+  }
+
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 interface Props {
@@ -25,13 +51,13 @@ const MealButtons = ({ mealId }: Props) => {
 
   return (
     <Container>
-      <button disabled={!canRemove} onClick={() => removeMeal()}>
-        -
-      </button>
+      <Button disabled={!canRemove} onClick={() => removeMeal()}>
+        <FaMinus />
+      </Button>
       <Counter>{count}</Counter>
-      <button disabled={!canAdd} onClick={() => addMeal()}>
-        +
-      </button>
+      <Button disabled={!canAdd} onClick={() => addMeal()}>
+        <FaPlus />
+      </Button>
     </Container>
   );
 };

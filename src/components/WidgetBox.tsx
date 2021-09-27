@@ -5,19 +5,8 @@ import WidgetCategory from "./WidgetCategory";
 import { selectCategoriesIds } from "../redux/selectors";
 import { getThemeBorder } from "../theme";
 
-const Container = styled.div`
-  margin: 8px;
-
-  align-self: flex-start;
-  flex: 0 0 320px;
-
-  border: 4px solid ${props => props.theme.colors.tertiary};
-  ${getThemeBorder}
-`;
-
 const Header = styled.div`
-  padding: 8px;
-  background-color: ${props => props.theme.colors.tertiary};
+  padding: 0 4px;
   color: white;
   font-weight: 500;
   font-size: 1.25em;
@@ -26,9 +15,18 @@ const Header = styled.div`
   justify-content: space-between;
 `;
 
-const Footer = styled.div`
-  height: 16px;
-  background-color: ${props => props.theme.colors.tertiary};
+const Container = styled.div`
+  padding: 8px;
+
+  align-self: flex-start;
+  flex: 0 0 320px;
+
+  background-color: ${({ theme }) => theme.colors.secondary600};
+  ${getThemeBorder}
+
+  ${Header} {
+    margin-bottom: 8px;
+  }
 `;
 
 const WidgetBox = () => {
@@ -46,7 +44,6 @@ const WidgetBox = () => {
       {categoriesIds?.map(id => (
         <WidgetCategory key={id} id={id} />
       ))}
-      <Footer />
     </Container>
   );
 };

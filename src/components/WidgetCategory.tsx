@@ -7,12 +7,20 @@ import {
 import { CategoryProvider } from "../redux/categoryContext";
 import styled from "styled-components";
 import WidgetMeal from "./WidgetMeal";
+import { getThemeBorder } from "../theme";
 
-const Container = styled.div``;
+const Container = styled.div`
+  background-color: ${({ theme }) => theme.colors.secondary500};
+  padding: 8px;
+  ${getThemeBorder}
+
+  & + & {
+    margin-top: 8px;
+  }
+`;
 
 const Header = styled.div`
-  padding: 8px;
-  background-color: ${props => props.theme.colors.tertiary2};
+  padding: 4px 0;
   color: white;
   font-weight: 500;
   font-size: 1.125em;

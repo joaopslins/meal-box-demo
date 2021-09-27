@@ -7,24 +7,27 @@ import MealCard from "./MealCard";
 import { getThemeBorder } from "../theme";
 
 const Container = styled.div`
-  border: 4px solid ${props => props.theme.colors.primary};
-  ${getThemeBorder}
+  background-color: ${({ theme }) => theme.colors.primary600};
+  padding: 0 8px 8px;
 
-  margin: 8px;
+  ${getThemeBorder}
 `;
 
 const Header = styled.div`
   padding: 8px;
-  background-color: ${props => props.theme.colors.primary};
   color: white;
   font-weight: 500;
-  font-size: 1.25em;
+  font-size: 1.5em;
 `;
 
 const MealListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  padding: 12px;
+  gap: 20px;
+
+  background-color: ${({ theme }) => theme.colors.primary100};
+  ${getThemeBorder}
 `;
 
 const CategorySection = ({ id }: { id: number }) => {

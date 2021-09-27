@@ -7,8 +7,21 @@ import Image from "./Image";
 import MealRater from "./MealRater";
 
 const Card = styled.div`
-  border: 1px solid red;
-  width: 120px;
+  width: 140px;
+  background-color: white;
+  box-shadow: 0 0 5px 1px rgba(34, 34, 34, 0.4);
+`;
+
+const Body = styled.div`
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Title = styled.div`
+  color: ${({ theme }) => theme.colors.secondary600};
+  font-weight: 500;
 `;
 
 const MealCard = ({ id }: { id: number }) => {
@@ -16,10 +29,12 @@ const MealCard = ({ id }: { id: number }) => {
 
   return (
     <Card>
-      <Image size={120} url={meal.image} />
-      <div>{meal.name}</div>
-      <MealRater mealId={id} size={24} />
+      <Image size={140} url={meal.image} />
       <MealButtons mealId={id} />
+      <Body>
+        <Title>{meal.name}</Title>
+        <MealRater mealId={id} size={20} />
+      </Body>
     </Card>
   );
 };
