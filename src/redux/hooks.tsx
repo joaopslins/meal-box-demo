@@ -4,8 +4,12 @@ import { useCategoryContext } from "./categoryContext";
 import { decrementMeal, incrementMeal, rateMeal } from "./slice";
 import {
   selectAvailableQtyByCategory,
+  selectBoxMealsByCategory,
+  selectMealBoxCurrentQuantity,
+  selectMealBoxTotalQuantity,
   selectMealById,
-  selectMealQuantityByCategory
+  selectPlanCapByCategory,
+  selectQuantityByCategoryByMeal
 } from "./selectors";
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
@@ -41,7 +45,7 @@ export const useMealInfo = (mealId: number) => {
   const categoryId = useCategoryContext();
 
   const count = useAppSelector(state =>
-    selectMealQuantityByCategory(state, { categoryId, mealId })
+    selectQuantityByCategoryByMeal(state, { categoryId, mealId })
   );
 
   const availableQtyOnCategory = useAppSelector(state =>
@@ -64,4 +68,22 @@ export const useMealRater = (mealId: number) => {
   };
 
   return { rating, setRating };
+};
+
+export const useBoxInfo = () => {
+  const selectedQuantity = useAppSelector(selectMealBoxCurrentQuantity);
+  const totalQuantity = useAppSelector(selectMealBoxTotalQuantity);
+
+  return { selectedQuantity, totalQuantity };
+};
+
+export const useCategoryBoxInfo = (categoryId: number) => {
+  const currentMealQuantity = useAppSelector(state =>
+    selectBoxMealsByCategory(state, { categoryId })
+  ).length;
+  const totalMealQuantity = useAppSelector(state =>
+    selectPlanCapByCategory(state, { categoryId })
+  );
+
+  return { currentMealQuantity, totalMealQuantity };
 };

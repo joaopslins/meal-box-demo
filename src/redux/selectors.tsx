@@ -12,11 +12,22 @@ export const selectMealById = (state: RootState, id: number) =>
   state.entities.meals[id];
 export const selectCategoriesIds = (state: RootState) => state.ui.categories;
 
-const selectPlanCapByCategory = (state: RootState, props: any) =>
+// TODO type this props https://stackoverflow.com/questions/42723922/can-you-declare-a-object-literal-type-that-allows-unknown-properties-in-typescri
+export const selectPlanCapByCategory = (state: RootState, props: any) =>
   state.plan[props.categoryId];
 
-const selectBoxMealsByCategory = (state: RootState, props: any) =>
+export const selectBoxMealsByCategory = (state: RootState, props: any) =>
   state.ui.box[props.categoryId] ?? [];
+
+export const selectMealBoxTotalQuantity = createSelector(
+  (state: RootState) => state.plan,
+  plans => Object.values(plans).reduce((acc, qty) => acc + qty, 0)
+);
+
+export const selectMealBoxCurrentQuantity = createSelector(
+  (state: RootState) => state.ui.box,
+  box => Object.values(box).reduce((acc, meals) => acc + meals.length, 0)
+);
 
 export const selectUniqueMealsByCategory = createSelector(
   selectBoxMealsByCategory,
@@ -30,10 +41,9 @@ export const selectAvailableQtyByCategory = createSelector(
 );
 
 // Fix memo
-export const selectMealQuantityByCategory = createSelector(
+export const selectQuantityByCategoryByMeal = createSelector(
   selectBoxMealsByCategory,
   (_, props) => props.mealId,
   (categoryBox, mealId) =>
-    categoryBox?.reduce((sum, meal) => (meal === mealId ? sum + 1 : sum), 0) ??
-    0
+    categoryBox.reduce((sum, meal) => (meal === mealId ? sum + 1 : sum), 0) ?? 0
 );

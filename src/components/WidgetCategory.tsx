@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppSelector } from "../redux/hooks";
+import { useAppSelector, useCategoryBoxInfo } from "../redux/hooks";
 import {
   selectCategoryById,
   selectUniqueMealsByCategory
@@ -21,11 +21,14 @@ const WidgetCategory = ({ id }: Props) => {
   const meals = useAppSelector(state =>
     selectUniqueMealsByCategory(state, { categoryId: id })
   );
+  const { currentMealQuantity, totalMealQuantity } = useCategoryBoxInfo(id);
 
   return (
     <CategoryProvider value={id}>
       <Container>
-        <div>{category.name}</div>
+        <div>
+          {category.name} {currentMealQuantity}/{totalMealQuantity}
+        </div>
         {meals.map(mealId => (
           <WidgetMeal key={mealId} id={mealId} />
         ))}

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useAppSelector } from "../redux/hooks";
+import { useAppSelector, useBoxInfo } from "../redux/hooks";
 import WidgetCategory from "./WidgetCategory";
 import { selectCategoriesIds } from "../redux/selectors";
 
@@ -16,10 +16,13 @@ const Container = styled.div`
 
 const WidgetBox = () => {
   const categoriesIds = useAppSelector(selectCategoriesIds);
+  const { selectedQuantity, totalQuantity } = useBoxInfo();
 
   return (
     <Container>
-      <div>Box</div>
+      <div>
+        Box {selectedQuantity}/{totalQuantity}
+      </div>
       {categoriesIds?.map(id => (
         <WidgetCategory key={id} id={id} />
       ))}
