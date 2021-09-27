@@ -8,13 +8,22 @@ import { CategoryProvider } from "../redux/categoryContext";
 import styled from "styled-components";
 import WidgetMeal from "./WidgetMeal";
 
+const Container = styled.div``;
+
+const Header = styled.div`
+  padding: 8px;
+  background-color: ${props => props.theme.colors.tertiary2};
+  color: white;
+  font-weight: 500;
+  font-size: 1.125em;
+
+  display: flex;
+  justify-content: space-between;
+`;
+
 interface Props {
   id: number;
 }
-
-const Container = styled.div`
-  border: 1px solid black;
-`;
 
 const WidgetCategory = ({ id }: Props) => {
   const category = useAppSelector(state => selectCategoryById(state, id));
@@ -26,9 +35,12 @@ const WidgetCategory = ({ id }: Props) => {
   return (
     <CategoryProvider value={id}>
       <Container>
-        <div>
-          {category.name} {currentMealQuantity}/{totalMealQuantity}
-        </div>
+        <Header>
+          <span>{category.name}</span>
+          <span>
+            {currentMealQuantity} / {totalMealQuantity}
+          </span>
+        </Header>
         {meals.map(mealId => (
           <WidgetMeal key={mealId} id={mealId} />
         ))}

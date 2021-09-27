@@ -4,12 +4,13 @@ import { selectCategoryById } from "../redux/selectors";
 import styled from "styled-components";
 import { CategoryProvider } from "../redux/categoryContext";
 import MealCard from "./MealCard";
+import { getThemeBorder } from "../theme";
 
 const Container = styled.div`
-  border: 2px solid ${props => props.theme.colors.primary};
-  border-radius: ${props => props.theme.borderRadius};
+  border: 4px solid ${props => props.theme.colors.primary};
+  ${getThemeBorder}
 
-  margin: 16px;
+  margin: 8px;
 `;
 
 const Header = styled.div`
@@ -26,6 +27,11 @@ const MealListContainer = styled.div`
   gap: 8px;
 `;
 
+const Footer = styled.div`
+  //height: 2px;
+  background-color: ${props => props.theme.colors.primary};
+`;
+
 const CategorySection = ({ id }: { id: number }) => {
   const category = useAppSelector(state => selectCategoryById(state, id));
 
@@ -38,6 +44,7 @@ const CategorySection = ({ id }: { id: number }) => {
             <MealCard key={mealId} id={mealId} />
           ))}
         </MealListContainer>
+        <Footer />
       </Container>
     </CategoryProvider>
   );
