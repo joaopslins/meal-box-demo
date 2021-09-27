@@ -11,3 +11,15 @@ export const useCategoryContext = () => {
 
   return category;
 };
+
+interface CategoryProviderProps {
+  value: number;
+  children: React.ReactNode;
+}
+
+export const CategoryProvider = ({
+  value,
+  children
+}: CategoryProviderProps) => (
+  <CategoryContext.Provider value={value} children={children} />
+);

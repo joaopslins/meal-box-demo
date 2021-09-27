@@ -4,7 +4,7 @@ import {
   selectCategoryById,
   selectUniqueMealsByCategory
 } from "../redux/selectors";
-import { CategoryContext } from "../redux/categoryContext";
+import { CategoryProvider } from "../redux/categoryContext";
 import styled from "styled-components";
 import WidgetMeal from "./WidgetMeal";
 
@@ -23,14 +23,14 @@ const WidgetCategory = ({ id }: Props) => {
   );
 
   return (
-    <CategoryContext.Provider value={id}>
+    <CategoryProvider value={id}>
       <Container>
         <div>{category.name}</div>
         {meals.map(mealId => (
           <WidgetMeal key={mealId} id={mealId} />
         ))}
       </Container>
-    </CategoryContext.Provider>
+    </CategoryProvider>
   );
 };
 

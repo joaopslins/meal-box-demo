@@ -2,7 +2,7 @@ import React from "react";
 import { useAppSelector } from "../redux/hooks";
 import { selectCategoryById } from "../redux/selectors";
 import styled from "styled-components";
-import { CategoryContext } from "../redux/categoryContext";
+import { CategoryProvider } from "../redux/categoryContext";
 import MealCard from "./MealCard";
 
 const Container = styled.div`
@@ -22,7 +22,7 @@ const CategorySection = ({ id }: { id: number }) => {
   const category = useAppSelector(state => selectCategoryById(state, id));
 
   return (
-    <CategoryContext.Provider value={id}>
+    <CategoryProvider value={id}>
       <Container>
         <div>Name: {category.name}</div>
         <MealListContainer>
@@ -31,7 +31,7 @@ const CategorySection = ({ id }: { id: number }) => {
           ))}
         </MealListContainer>
       </Container>
-    </CategoryContext.Provider>
+    </CategoryProvider>
   );
 };
 
