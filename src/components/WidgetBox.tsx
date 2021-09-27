@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useAppSelector } from "../redux/hooks";
 import WidgetCategory from "./WidgetCategory";
+import { selectCategoriesIds } from "../redux/selectors";
 
 const Container = styled.div`
   margin: 16px;
@@ -14,7 +15,7 @@ const Container = styled.div`
 `;
 
 const WidgetBox = () => {
-  const categoriesIds = useAppSelector(state => state.ui.categories);
+  const categoriesIds = useAppSelector(selectCategoriesIds);
 
   return (
     <Container>

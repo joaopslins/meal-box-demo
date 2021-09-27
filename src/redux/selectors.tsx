@@ -10,6 +10,7 @@ export const selectCategoryById = (state: RootState, id: number) =>
   state.entities.categories[id];
 export const selectMealById = (state: RootState, id: number) =>
   state.entities.meals[id];
+export const selectCategoriesIds = (state: RootState) => state.ui.categories;
 
 const selectPlanCapByCategory = (state: RootState, props: any) =>
   state.plan[props.categoryId];
