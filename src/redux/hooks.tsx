@@ -1,9 +1,10 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "./store";
 import { useCategoryContext } from "./categoryContext";
-import { decrementMeal, incrementMeal } from "./slice";
+import { decrementMeal, incrementMeal, rateMeal } from "./slice";
 import {
   selectAvailableQtyByCategory,
+  selectMealById,
   selectMealQuantityByCategory
 } from "./selectors";
 
@@ -51,4 +52,16 @@ export const useMealInfo = (mealId: number) => {
   const canRemove = count > 0;
 
   return { count, canRemove, canAdd };
+};
+
+export const useMealRater = (mealId: number) => {
+  const dispatch = useAppDispatch();
+  const rating =
+    useAppSelector(state => selectMealById(state, mealId)).rating ?? 0;
+
+  const setRating = (rating: number) => {
+    dispatch(rateMeal({ mealId, rating }));
+  };
+
+  return { rating, setRating };
 };

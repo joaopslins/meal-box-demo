@@ -4,6 +4,7 @@ import { selectMealById } from "../redux/selectors";
 import styled from "styled-components";
 import MealButtons from "./MealButtons";
 import Image from "./Image";
+import MealRater from "./MealRater";
 
 const Card = styled.div`
   border: 1px solid red;
@@ -17,6 +18,7 @@ const MealCard = ({ id }: { id: number }) => {
     <Card>
       <Image size={120} url={meal.image} />
       <div>{meal.name}</div>
+      <MealRater mealId={id} size={24} />
       <MealButtons mealId={id} />
     </Card>
   );

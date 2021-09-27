@@ -8,6 +8,7 @@ export interface Meal {
   id: number;
   name: string;
   image: string;
+  rating?: number;
 }
 
 export interface CategoryAPI {

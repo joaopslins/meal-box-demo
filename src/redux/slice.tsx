@@ -55,6 +55,11 @@ interface MealActionPayload {
   categoryId: number;
 }
 
+interface MealRatePayload {
+  mealId: number;
+  rating: number;
+}
+
 export const slice = createSlice({
   name: "state",
   initialState,
@@ -70,6 +75,10 @@ export const slice = createSlice({
       if (firstIndex === -1) return;
 
       state.ui.box[action.payload.categoryId].splice(firstIndex, 1);
+    },
+    rateMeal: (state, action: PayloadAction<MealRatePayload>) => {
+      state.entities.meals[action.payload.mealId].rating =
+        action.payload.rating;
     }
   },
   extraReducers: builder => {
@@ -99,7 +108,7 @@ export const slice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { incrementMeal, decrementMeal } = slice.actions;
+export const { incrementMeal, decrementMeal, rateMeal } = slice.actions;
 // Define a thunk that dispatches those action creators
 
 export default slice.reducer;
