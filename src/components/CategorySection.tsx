@@ -6,10 +6,18 @@ import { CategoryProvider } from "../redux/categoryContext";
 import MealCard from "./MealCard";
 
 const Container = styled.div`
-  border: 1px solid black;
-  padding: 8px;
+  border: 2px solid ${props => props.theme.colors.primary};
+  border-radius: ${props => props.theme.borderRadius};
 
   margin: 16px;
+`;
+
+const Header = styled.div`
+  padding: 8px;
+  background-color: ${props => props.theme.colors.primary};
+  color: white;
+  font-weight: 500;
+  font-size: 1.25em;
 `;
 
 const MealListContainer = styled.div`
@@ -24,7 +32,7 @@ const CategorySection = ({ id }: { id: number }) => {
   return (
     <CategoryProvider value={id}>
       <Container>
-        <div>Name: {category.name}</div>
+        <Header>{category.name}</Header>
         <MealListContainer>
           {category.meals.map(mealId => (
             <MealCard key={mealId} id={mealId} />
