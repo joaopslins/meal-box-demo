@@ -10,6 +10,9 @@ const Card = styled.div`
   width: 140px;
   background-color: white;
   box-shadow: 0 0 5px 1px rgba(34, 34, 34, 0.4);
+
+  display: flex;
+  flex-direction: column;
 `;
 
 const Body = styled.div`
@@ -17,11 +20,14 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1;
 `;
 
 const Title = styled.div`
   color: ${({ theme }) => theme.colors.secondary600};
+  text-align: center;
   font-weight: 500;
+  flex: 1;
 `;
 
 const MealCard = ({ id }: { id: number }) => {
