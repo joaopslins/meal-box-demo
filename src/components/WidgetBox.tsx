@@ -4,6 +4,11 @@ import { useAppSelector, useBoxInfo } from "../redux/hooks";
 import WidgetCategory from "./WidgetCategory";
 import { selectCategoriesIds } from "../redux/selectors";
 import { getThemeBorder } from "../theme";
+import Sticky from "react-sticky-el";
+
+const StickyContainer = styled.div`
+  flex: 0 0 320px;
+`;
 
 const Header = styled.div`
   padding: 0 4px;
@@ -15,11 +20,8 @@ const Header = styled.div`
   justify-content: space-between;
 `;
 
-const Container = styled.div`
+const BoxContainer = styled.div`
   padding: 8px;
-
-  align-self: flex-start;
-  flex: 0 0 320px;
 
   background-color: ${({ theme }) => theme.colors.secondary600};
   ${getThemeBorder}
@@ -34,17 +36,21 @@ const WidgetBox = () => {
   const { selectedQuantity, totalQuantity } = useBoxInfo();
 
   return (
-    <Container>
-      <Header>
-        <span>Your Box</span>
-        <span>
-          {selectedQuantity} / {totalQuantity}
-        </span>
-      </Header>
-      {categoriesIds?.map(id => (
-        <WidgetCategory key={id} id={id} />
-      ))}
-    </Container>
+    <StickyContainer>
+      <Sticky topOffset={-16} stickyStyle={{ marginTop: "16px" }}>
+        <BoxContainer>
+          <Header>
+            <span>Your Box</span>
+            <span>
+              {selectedQuantity} / {totalQuantity}
+            </span>
+          </Header>
+          {categoriesIds?.map(id => (
+            <WidgetCategory key={id} id={id} />
+          ))}
+        </BoxContainer>
+      </Sticky>
+    </StickyContainer>
   );
 };
 
