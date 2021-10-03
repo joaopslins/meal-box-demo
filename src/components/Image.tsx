@@ -8,6 +8,7 @@ const Image = styled.div<{
   width: ${({ size }) => size}px;
   height: ${({ size }) => size}px;
   background-image: url(${({ url }) => url});
+  background-position: center;
 `;
 
 export default Image;
