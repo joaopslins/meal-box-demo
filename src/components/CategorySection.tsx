@@ -30,7 +30,11 @@ const MealListContainer = styled.div`
   ${getThemeBorder}
 `;
 
-const CategorySection = ({ id }: { id: number }) => {
+interface Props {
+  id: number;
+}
+
+const CategorySection = ({ id }: Props) => {
   const category = useAppSelector(state => selectCategoryById(state, id));
 
   return (

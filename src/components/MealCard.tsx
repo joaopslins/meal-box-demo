@@ -30,7 +30,11 @@ const Title = styled.div`
   flex: 1;
 `;
 
-const MealCard = ({ id }: { id: number }) => {
+interface Props {
+  id: number;
+}
+
+const MealCard = ({ id }: Props) => {
   const meal = useAppSelector(state => selectMealById(state, id));
 
   return (

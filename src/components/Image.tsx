@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
-const Image = styled.div<{
+interface ImageProps {
   url: string;
   size: number;
-}>`
+}
+
+const Image = styled.div<ImageProps>`
   background-size: cover;
   width: ${({ size }) => size}px;
   height: ${({ size }) => size}px;

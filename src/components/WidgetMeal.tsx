@@ -7,10 +7,6 @@ import Image from "./Image";
 import MealRater from "./MealRater";
 import { getThemeBorder } from "../theme";
 
-interface Props {
-  id: number;
-}
-
 const Container = styled.div`
   box-shadow: 0 0 5px 1px rgba(34, 34, 34, 0.4);
   display: flex;
@@ -46,6 +42,10 @@ const Title = styled.div`
   font-weight: 500;
   color: #222222;
 `;
+
+interface Props {
+  id: number;
+}
 
 const WidgetMeal = ({ id }: Props) => {
   const meal = useAppSelector(state => selectMealById(state, id));
