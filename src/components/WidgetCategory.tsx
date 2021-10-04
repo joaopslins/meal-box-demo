@@ -5,6 +5,7 @@ import { CategoryProvider } from "../redux/categoryContext";
 import styled from "styled-components";
 import WidgetMeal from "./WidgetMeal";
 import { getThemeBorder } from "../theme";
+import WidgetClearCategoryButton from "./WidgetClearCategoryButton";
 
 const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.secondary500};
@@ -26,6 +27,14 @@ const Header = styled.div`
   justify-content: space-between;
 `;
 
+const HeaderInfo = styled.div`
+  display: flex;
+
+  > * + * {
+    margin-left: 8px;
+  }
+`;
+
 interface Props {
   id: number;
 }
@@ -43,9 +52,14 @@ const WidgetCategory = ({ id }: Props) => {
       <Container>
         <Header>
           <span>{category.name}</span>
-          <span>
-            {currentMealQuantity} / {totalMealQuantity}
-          </span>
+          <HeaderInfo>
+            {currentMealQuantity > 0 && (
+              <WidgetClearCategoryButton categoryId={id} />
+            )}
+            <span>
+              {currentMealQuantity} / {totalMealQuantity}
+            </span>
+          </HeaderInfo>
         </Header>
         {uniqueMeals.map(mealId => (
           <WidgetMeal key={mealId} id={mealId} />

@@ -80,6 +80,9 @@ export const slice = createSlice({
       state.entities.meals[action.payload.mealId].rating =
         action.payload.rating;
     },
+    clearCategory: (state, action: PayloadAction<number>) => {
+      state.ui.box[action.payload] = [];
+    },
     applyRecomendation: state => {
       state.ui.categories?.forEach(categoryId => {
         const meals = state.entities.categories[categoryId].meals;
@@ -125,7 +128,8 @@ export const {
   incrementMeal,
   decrementMeal,
   rateMeal,
-  applyRecomendation
+  applyRecomendation,
+  clearCategory
 } = slice.actions;
 // Define a thunk that dispatches those action creators
 
