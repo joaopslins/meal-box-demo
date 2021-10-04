@@ -1,13 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { useAppSelector, useBoxInfo } from "../redux/hooks";
+import { useAppSelector } from "../redux/hooks";
 import WidgetCategory from "./WidgetCategory";
 import { selectCategoriesIds } from "../redux/selectors";
 import { getThemeBorder } from "../theme";
 import Sticky from "react-sticky-el";
+import WidgetSubmit from "./WidgetSubmit";
+import WidgetRecomendationButton from "./WidgetRecomendationButton";
 
 const StickyContainer = styled.div`
-  flex: 0 0 320px;
+  flex: 0 0 360px;
 `;
 
 const Header = styled.div`
@@ -31,9 +33,13 @@ const BoxContainer = styled.div`
   }
 `;
 
+const ScrollableArea = styled.div`
+  max-height: 80vh;
+  overflow: auto;
+`;
+
 const WidgetBox = () => {
   const categoriesIds = useAppSelector(selectCategoriesIds);
-  const { selectedQuantity, totalQuantity } = useBoxInfo();
 
   return (
     <StickyContainer>
@@ -41,14 +47,15 @@ const WidgetBox = () => {
         <BoxContainer>
           <Header>
             <span>Your Box</span>
-            <span>
-              {selectedQuantity} / {totalQuantity}
-            </span>
           </Header>
-          {categoriesIds?.map(id => (
-            <WidgetCategory key={id} id={id} />
-          ))}
+          <ScrollableArea>
+            {categoriesIds?.map(id => (
+              <WidgetCategory key={id} id={id} />
+            ))}
+          </ScrollableArea>
+          <WidgetSubmit />
         </BoxContainer>
+        <WidgetRecomendationButton />
       </Sticky>
     </StickyContainer>
   );

@@ -10,6 +10,10 @@ const GlobalStyle = createGlobalStyle`
     margin: 16px;
     font-family: 'Roboto', sans-serif;
   }
+  
+  button {
+    font-family: 'Roboto', sans-serif;
+  }
 `;
 
 const App = () => (

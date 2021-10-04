@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useMealActions, useMealInfo } from "../redux/hooks";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import BaseButton from "./BaseButton";
 
 const Container = styled.div`
   display: flex;
@@ -19,27 +20,13 @@ const Counter = styled.div`
   font-weight: 700;
 `;
 
-const Button = styled.button`
+const Button = styled(BaseButton)`
   height: 24px;
   width: 24px;
 
-  border: 0;
-  background-color: ${({ theme }) => theme.colors.primary500};
   color: #222222;
 
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.primary400};
-  }
-
-  &:disabled {
-    background-color: silver;
-    cursor: not-allowed;
-  }
-
-  cursor: pointer;
-  display: flex;
   justify-content: center;
-  align-items: center;
 `;
 
 interface Props {
