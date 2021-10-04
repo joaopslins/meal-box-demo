@@ -1,10 +1,10 @@
 import React from "react";
 import { BlockButton } from "./BaseButton";
-import { useDispatch } from "react-redux";
 import { applyRecomendation } from "../redux/slice";
+import { useAppDispatch } from "../redux/hooks";
 
 const WidgetRecomendationButton = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleApplyRecommendation = () => {
     dispatch(applyRecomendation());

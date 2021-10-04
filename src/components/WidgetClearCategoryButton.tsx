@@ -1,9 +1,9 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { clearCategory } from "../redux/slice";
 import styled from "styled-components";
 import BaseButton from "./BaseButton";
 import { FaTrash } from "react-icons/fa";
+import { useAppDispatch } from "../redux/hooks";
 
 interface Props {
   categoryId: number;
@@ -24,7 +24,7 @@ const Button = styled(BaseButton)`
 `;
 
 const WidgetClearCategoryButton = ({ categoryId }: Props) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleClear = () => {
     dispatch(clearCategory(categoryId));
