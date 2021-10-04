@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Category, CategoryAPI, Meal, MyPlanAPI } from "../types";
 import { normalize } from "normalizr";
 import { categorySchema } from "../schemas";
-import { selectBoxMealsByCategory } from "./selectors";
 
 export interface State {
   entities: {

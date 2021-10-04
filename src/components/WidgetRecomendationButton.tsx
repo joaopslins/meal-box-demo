@@ -12,7 +12,7 @@ const WidgetRecomendationButton = () => {
 
   return (
     <BlockButton onClick={handleApplyRecommendation}>
-      Chef's recommendation!
+      Get chef's recommendation!
     </BlockButton>
   );
 };
