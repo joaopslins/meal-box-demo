@@ -15,7 +15,6 @@ const RouteContainer = styled.div`
   flex: 1 1 auto;
 `;
 
-// TODO semantic html
 const Routes = () => {
   const dispatch = useAppDispatch();
 

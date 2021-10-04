@@ -1,15 +1,15 @@
 import React from "react";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { ThemeProviderApp } from "./theme";
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <HashRouter basename="/">
         <ThemeProviderApp>{children}</ThemeProviderApp>
-      </BrowserRouter>
+      </HashRouter>
     </Provider>
   );
 };
