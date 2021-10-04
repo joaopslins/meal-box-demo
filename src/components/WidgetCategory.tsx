@@ -1,9 +1,6 @@
 import React from "react";
 import { useAppSelector, useCategoryBoxInfo } from "../redux/hooks";
-import {
-  selectCategoryById,
-  selectUniqueMealsByCategory
-} from "../redux/selectors";
+import { selectCategoryById } from "../redux/selectors";
 import { CategoryProvider } from "../redux/categoryContext";
 import styled from "styled-components";
 import WidgetMeal from "./WidgetMeal";
@@ -35,10 +32,11 @@ interface Props {
 
 const WidgetCategory = ({ id }: Props) => {
   const category = useAppSelector(state => selectCategoryById(state, id));
-  const meals = useAppSelector(state =>
-    selectUniqueMealsByCategory(state, { categoryId: id })
-  );
-  const { currentMealQuantity, totalMealQuantity } = useCategoryBoxInfo(id);
+  const {
+    uniqueMeals,
+    currentMealQuantity,
+    totalMealQuantity
+  } = useCategoryBoxInfo(id);
 
   return (
     <CategoryProvider value={id}>
@@ -49,7 +47,7 @@ const WidgetCategory = ({ id }: Props) => {
             {currentMealQuantity} / {totalMealQuantity}
           </span>
         </Header>
-        {meals.map(mealId => (
+        {uniqueMeals.map(mealId => (
           <WidgetMeal key={mealId} id={mealId} />
         ))}
       </Container>

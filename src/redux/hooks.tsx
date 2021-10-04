@@ -3,18 +3,23 @@ import { RootState, AppDispatch } from "./store";
 import { useCategoryContext } from "./categoryContext";
 import { decrementMeal, incrementMeal, rateMeal } from "./slice";
 import {
+  factorySelectQuantityByCategoryByMeal,
+  factorySelectUniqueMealsByCategory,
   selectAvailableQtyByCategory,
   selectBoxMealsByCategory,
   selectMealBoxCurrentQuantity,
   selectMealBoxTotalQuantity,
   selectMealById,
-  selectPlanCapByCategory,
-  selectQuantityByCategoryByMeal
+  selectPlanCapByCategory
 } from "./selectors";
+import { useMemo } from "react";
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+const useMemoSelector: <T>(factory: () => T) => T = factory =>
+  useMemo(() => factory(), []);
 
 export const useMealActions = (mealId: number) => {
   const categoryId = useCategoryContext();
@@ -44,15 +49,18 @@ export const useMealActions = (mealId: number) => {
 export const useMealInfo = (mealId: number) => {
   const categoryId = useCategoryContext();
 
+  const memoSelectQuantityByCategoryByMeal = useMemoSelector(
+    factorySelectQuantityByCategoryByMeal
+  );
+
   const count = useAppSelector(state =>
-    selectQuantityByCategoryByMeal(state, { categoryId, mealId })
+    memoSelectQuantityByCategoryByMeal(state, { categoryId, mealId })
   );
 
-  const availableQtyOnCategory = useAppSelector(state =>
-    selectAvailableQtyByCategory(state, { categoryId })
+  const canAdd = useAppSelector(
+    state => selectAvailableQtyByCategory(state, { categoryId }) > 0
   );
 
-  const canAdd = availableQtyOnCategory > 0;
   const canRemove = count > 0;
 
   return { count, canRemove, canAdd };
@@ -78,6 +86,10 @@ export const useBoxInfo = () => {
 };
 
 export const useCategoryBoxInfo = (categoryId: number) => {
+  const memoSelectUniqueMealsByCategory = useMemoSelector(
+    factorySelectUniqueMealsByCategory
+  );
+
   const currentMealQuantity = useAppSelector(state =>
     selectBoxMealsByCategory(state, { categoryId })
   ).length;
@@ -85,5 +97,9 @@ export const useCategoryBoxInfo = (categoryId: number) => {
     selectPlanCapByCategory(state, { categoryId })
   );
 
-  return { currentMealQuantity, totalMealQuantity };
+  const uniqueMeals = useAppSelector(state =>
+    memoSelectUniqueMealsByCategory(state, { categoryId })
+  );
+
+  return { currentMealQuantity, totalMealQuantity, uniqueMeals };
 };

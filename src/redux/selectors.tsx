@@ -29,21 +29,20 @@ export const selectMealBoxCurrentQuantity = createSelector(
   box => Object.values(box).reduce((acc, meals) => acc + meals.length, 0)
 );
 
-export const selectUniqueMealsByCategory = createSelector(
-  selectBoxMealsByCategory,
-  meals => [...new Set(meals)]
-);
-
 export const selectAvailableQtyByCategory = createSelector(
   selectPlanCapByCategory,
   selectBoxMealsByCategory,
   (planCap, boxList) => planCap - boxList.length
 );
 
-// Fix memo
-export const selectQuantityByCategoryByMeal = createSelector(
-  selectBoxMealsByCategory,
-  (_, props) => props.mealId,
-  (categoryBox, mealId) =>
-    categoryBox.reduce((sum, meal) => (meal === mealId ? sum + 1 : sum), 0) ?? 0
-);
+export const factorySelectUniqueMealsByCategory = () =>
+  createSelector(selectBoxMealsByCategory, meals => [...new Set(meals)]);
+
+export const factorySelectQuantityByCategoryByMeal = () =>
+  createSelector(
+    selectBoxMealsByCategory,
+    (_, props) => props.mealId,
+    (categoryBox, mealId) =>
+      categoryBox.reduce((sum, meal) => (meal === mealId ? sum + 1 : sum), 0) ??
+      0
+  );
