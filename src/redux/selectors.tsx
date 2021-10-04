@@ -41,6 +41,10 @@ export const selectAvailableQtyByCategory = createSelector(
   (planCap, boxList) => planCap - boxList.length
 );
 
+// Factory selectors are needed because they are used in multiple instances of components,
+//  and createSelector only has a cache of 1
+// See https://github.com/reduxjs/reselect#sharing-selectors-with-props-across-multiple-component-instances
+// and https://react-redux.js.org/api/hooks#using-memoizing-selectors
 export const factorySelectUniqueMealsByCategory = () =>
   createSelector(selectBoxMealsByCategory, meals => [...new Set(meals)]);
 
