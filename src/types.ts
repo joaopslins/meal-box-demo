@@ -20,7 +20,7 @@ export interface CategoryAPI {
       name: string;
       image: string;
     }[];
-  };
+  }[];
 }
 
 export interface MyPlanAPI {

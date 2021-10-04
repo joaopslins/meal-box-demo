@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Category, CategoryAPI, Meal, MyPlanAPI } from "../types";
 import { normalize } from "normalizr";
-import { categorySchema } from "../schemas";
+import { categorySchema } from "./schemas";
+import { localFetchCategories, localFetchMyPlan } from "../localFetch";
 
 export interface State {
   entities: {
@@ -36,18 +37,11 @@ const initialState: State = {
 
 export const fetchCategories = createAsyncThunk<CategoryAPI>(
   "categories/fetchAll",
-  async thunkAPI => {
-    const response = await fetch("http://localhost:3004/categories");
-    return await response.json();
-  }
+  async _ => localFetchCategories()
 );
 
-export const fetchPlan = createAsyncThunk<MyPlanAPI>(
-  "myPlan/fetch",
-  async thunkAPI => {
-    const response = await fetch("http://localhost:3004/myPlan");
-    return await response.json();
-  }
+export const fetchPlan = createAsyncThunk<MyPlanAPI>("myPlan/fetch", async _ =>
+  localFetchMyPlan()
 );
 
 interface MealActionPayload {
