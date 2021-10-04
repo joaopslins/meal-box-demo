@@ -49,6 +49,7 @@ export const useMealActions = (mealId: number) => {
 export const useMealInfo = (mealId: number) => {
   const categoryId = useCategoryContext();
 
+  // Memoized since this is used by multiple instances
   const memoSelectQuantityByCategoryByMeal = useMemoSelector(
     factorySelectQuantityByCategoryByMeal
   );
@@ -86,6 +87,7 @@ export const useBoxInfo = () => {
 };
 
 export const useCategoryBoxInfo = (categoryId: number) => {
+  // Memoized since this is used by multiple instances
   const memoSelectUniqueMealsByCategory = useMemoSelector(
     factorySelectUniqueMealsByCategory
   );
