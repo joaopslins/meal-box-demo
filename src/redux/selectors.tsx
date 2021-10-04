@@ -6,18 +6,24 @@ import { RootState } from "./store";
 // https://medium.com/swlh/building-efficient-reselect-selectors-759800f8ed7f
 // https://github.com/reduxjs/reselect/issues/97
 
+// https://stackoverflow.com/questions/42723922/can-you-declare-a-object-literal-type-that-allows-unknown-properties-in-typescri
+type Requires<T> = T & { [key: string]: unknown };
+
 export const selectCategoryById = (state: RootState, id: number) =>
   state.entities.categories[id];
 export const selectMealById = (state: RootState, id: number) =>
   state.entities.meals[id];
 export const selectCategoriesIds = (state: RootState) => state.ui.categories;
 
-// TODO type this props https://stackoverflow.com/questions/42723922/can-you-declare-a-object-literal-type-that-allows-unknown-properties-in-typescri
-export const selectPlanCapByCategory = (state: RootState, props: any) =>
-  state.plan[props.categoryId];
+export const selectPlanCapByCategory = (
+  state: RootState,
+  props: Requires<{ categoryId: number }>
+) => state.plan[props.categoryId];
 
-export const selectBoxMealsByCategory = (state: RootState, props: any) =>
-  state.ui.box[props.categoryId] ?? [];
+export const selectBoxMealsByCategory = (
+  state: RootState,
+  props: Requires<{ categoryId: number }>
+) => state.ui.box[props.categoryId] ?? [];
 
 export const selectMealBoxTotalQuantity = createSelector(
   (state: RootState) => state.plan,
@@ -41,7 +47,7 @@ export const factorySelectUniqueMealsByCategory = () =>
 export const factorySelectQuantityByCategoryByMeal = () =>
   createSelector(
     selectBoxMealsByCategory,
-    (_, props) => props.mealId,
+    (_, props: Requires<{ mealId: number }>) => props.mealId,
     (categoryBox, mealId) =>
       categoryBox.reduce((sum, meal) => (meal === mealId ? sum + 1 : sum), 0) ??
       0

@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Category, CategoryAPI, Meal, MyPlanAPI } from "../types";
 import { normalize } from "normalizr";
 import { categorySchema } from "../schemas";
+import { selectBoxMealsByCategory } from "./selectors";
 
 export interface State {
   entities: {
@@ -79,6 +80,19 @@ export const slice = createSlice({
     rateMeal: (state, action: PayloadAction<MealRatePayload>) => {
       state.entities.meals[action.payload.mealId].rating =
         action.payload.rating;
+    },
+    applyRecomendation: state => {
+      state.ui.categories?.forEach(categoryId => {
+        const meals = state.entities.categories[categoryId].meals;
+        const finalMeals = [];
+
+        while (finalMeals.length < state.plan[categoryId]) {
+          const randomMealIndex = Math.floor(Math.random() * meals.length);
+          finalMeals.push(meals[randomMealIndex]);
+        }
+
+        state.ui.box[categoryId] = [...finalMeals];
+      });
     }
   },
   extraReducers: builder => {
@@ -108,7 +122,12 @@ export const slice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { incrementMeal, decrementMeal, rateMeal } = slice.actions;
+export const {
+  incrementMeal,
+  decrementMeal,
+  rateMeal,
+  applyRecomendation
+} = slice.actions;
 // Define a thunk that dispatches those action creators
 
 export default slice.reducer;
