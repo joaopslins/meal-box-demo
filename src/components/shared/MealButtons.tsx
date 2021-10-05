@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useMealActions, useMealInfo } from "../../redux/hooks";
+import { useMealActions, useMealBoxInfo } from "../../redux/hooks";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import BaseButton from "./BaseButton";
 
@@ -34,7 +34,7 @@ interface Props {
 }
 
 const MealButtons = ({ mealId }: Props) => {
-  const { count, canAdd, canRemove } = useMealInfo(mealId);
+  const { count, canAdd, canRemove } = useMealBoxInfo(mealId);
   const { addMeal, removeMeal } = useMealActions(mealId);
 
   return (

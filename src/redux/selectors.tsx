@@ -15,6 +15,15 @@ export const selectMealById = (state: RootState, id: number) =>
   state.entities.meals[id];
 export const selectCategoriesIds = (state: RootState) => state.ui.categories;
 
+export const selectCategoriesContainingMeal = createSelector(
+  (_: RootState, props: Requires<{ mealId: number }>) => props.mealId,
+  (state: RootState) => state.entities.categories,
+  (mealId, categoryEntities) =>
+    Object.values(categoryEntities)
+      .filter(category => category.meals.includes(mealId))
+      .map(category => category.id)
+);
+
 export const selectPlanCapByCategory = (
   state: RootState,
   props: Requires<{ categoryId: number }>

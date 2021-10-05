@@ -46,7 +46,7 @@ export const useMealActions = (mealId: number) => {
   return { addMeal, removeMeal };
 };
 
-export const useMealInfo = (mealId: number) => {
+export const useMealBoxInfo = (mealId: number) => {
   const categoryId = useCategoryContext();
 
   // Memoized since this is used by multiple instances

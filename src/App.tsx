@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: #EEEEEE;
     margin: 16px;
     font-family: 'Roboto', sans-serif;
+    overflow-y: scroll;
   }
   
   button {

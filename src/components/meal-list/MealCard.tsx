@@ -43,14 +43,16 @@ interface Props {
 }
 
 const MealCard = ({ id }: Props) => {
-  const meal = useAppSelector(state => selectMealById(state, id));
+  // Needed so the entire MealCard does not rerender if meal changes (rating action)
+  const mealName = useAppSelector(state => selectMealById(state, id).name);
+  const mealImage = useAppSelector(state => selectMealById(state, id).image);
 
   return (
     <Card>
-      <Image size={140} url={meal.image} />
+      <Image size={140} url={mealImage} />
       <MealButtons mealId={id} />
       <Body>
-        <Title to={`/detail/${id}`}>{meal.name}</Title>
+        <Title to={`/detail/${id}`}>{mealName}</Title>
         <MealRater mealId={id} size={20} />
       </Body>
     </Card>
