@@ -21,7 +21,7 @@ const Routes = () => {
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(fetchPlan());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container>
