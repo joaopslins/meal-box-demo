@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { useAppSelector } from "../redux/hooks";
-import { selectMealById } from "../redux/selectors";
+import { useMealInfo } from "../redux/hooks";
 import MainCard from "../components/shared/MainCard";
 import styled from "styled-components";
 import Image from "../components/shared/Image";
@@ -48,20 +47,17 @@ const BackLink = styled(Link)`
 const MealDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const mealId = Number(id);
-  const mealName = useAppSelector(state => selectMealById(state, mealId)?.name);
-  const mealImage = useAppSelector(
-    state => selectMealById(state, mealId)?.image
-  );
+  const { name, image } = useMealInfo(mealId);
 
-  if (!mealName) return null;
+  if (!name) return null;
 
   return (
     <Container>
-      <MainCard header={mealName}>
+      <MainCard header={name}>
         <Content>
           <SectionWrapper>
             <MealInfo>
-              <Image size={220} url={mealImage} roundBorder />
+              <Image size={220} url={image} roundBorder />
               <MealRater mealId={mealId} size={32} />
               <MealDetailBoxManager mealId={mealId} />
             </MealInfo>

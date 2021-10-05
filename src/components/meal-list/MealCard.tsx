@@ -1,6 +1,5 @@
 import React from "react";
-import { useAppSelector } from "../../redux/hooks";
-import { selectMealById } from "../../redux/selectors";
+import { useMealInfo } from "../../redux/hooks";
 import styled from "styled-components";
 import MealButtons from "../shared/MealButtons";
 import Image from "../shared/Image";
@@ -43,16 +42,14 @@ interface Props {
 }
 
 const MealCard = ({ id }: Props) => {
-  // Needed so the entire MealCard does not rerender if meal changes (rating action)
-  const mealName = useAppSelector(state => selectMealById(state, id).name);
-  const mealImage = useAppSelector(state => selectMealById(state, id).image);
+  const { name, image } = useMealInfo(id);
 
   return (
     <Card>
-      <Image size={140} url={mealImage} />
+      <Image size={140} url={image} />
       <MealButtons mealId={id} />
       <Body>
-        <Title to={`/detail/${id}`}>{mealName}</Title>
+        <Title to={`/detail/${id}`}>{name}</Title>
         <MealRater mealId={id} size={20} />
       </Body>
     </Card>

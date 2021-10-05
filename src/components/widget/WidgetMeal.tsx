@@ -1,6 +1,5 @@
 import React from "react";
-import { useAppSelector } from "../../redux/hooks";
-import { selectMealById } from "../../redux/selectors";
+import { useMealInfo } from "../../redux/hooks";
 import MealButtons from "../shared/MealButtons";
 import styled from "styled-components";
 import Image from "../shared/Image";
@@ -48,14 +47,14 @@ interface Props {
 }
 
 const WidgetMeal = ({ id }: Props) => {
-  const meal = useAppSelector(state => selectMealById(state, id));
+  const { name, image } = useMealInfo(id);
 
   return (
     <Container>
-      <Image size={64} url={meal.image} />
+      <Image size={64} url={image} />
       <Details>
         <HeaderContainer>
-          <Title>{meal.name}</Title>
+          <Title>{name}</Title>
           <MealRater mealId={id} />
         </HeaderContainer>
         <ButtonsContainer>

@@ -46,6 +46,13 @@ export const useMealActions = (mealId: number) => {
   return { addMeal, removeMeal };
 };
 
+export const useMealInfo = (mealId: number) => {
+  const name = useAppSelector(state => selectMealById(state, mealId)?.name);
+  const image = useAppSelector(state => selectMealById(state, mealId)?.image);
+
+  return { name, image };
+};
+
 export const useMealBoxInfo = (mealId: number) => {
   const categoryId = useCategoryContext();
 
