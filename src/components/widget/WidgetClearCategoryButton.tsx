@@ -1,9 +1,9 @@
 import React from "react";
-import { clearCategory } from "../redux/slice";
+import { clearCategory } from "../../redux/slice";
 import styled from "styled-components";
-import BaseButton from "./BaseButton";
+import BaseButton from "../shared/BaseButton";
 import { FaTrash } from "react-icons/fa";
-import { useAppDispatch } from "../redux/hooks";
+import { useAppDispatch } from "../../redux/hooks";
 
 interface Props {
   categoryId: number;

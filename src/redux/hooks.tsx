@@ -19,7 +19,7 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 const useMemoSelector: <T>(factory: () => T) => T = factory =>
-  useMemo(() => factory(), []);
+  useMemo(() => factory(), [factory]);
 
 export const useMealActions = (mealId: number) => {
   const categoryId = useCategoryContext();

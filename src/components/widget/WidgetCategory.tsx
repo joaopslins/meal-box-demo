@@ -1,10 +1,10 @@
 import React from "react";
-import { useAppSelector, useCategoryBoxInfo } from "../redux/hooks";
-import { selectCategoryById } from "../redux/selectors";
-import { CategoryProvider } from "../redux/categoryContext";
+import { useAppSelector, useCategoryBoxInfo } from "../../redux/hooks";
+import { selectCategoryById } from "../../redux/selectors";
+import { CategoryProvider } from "../../redux/categoryContext";
 import styled from "styled-components";
 import WidgetMeal from "./WidgetMeal";
-import { getThemeBorder } from "../theme";
+import { getThemeBorder } from "../../theme";
 import WidgetClearCategoryButton from "./WidgetClearCategoryButton";
 
 const Container = styled.div`

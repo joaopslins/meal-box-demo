@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { useAppSelector } from "../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import WidgetCategory from "./WidgetCategory";
-import { selectCategoriesIds } from "../redux/selectors";
-import { getThemeBorder } from "../theme";
+import { selectCategoriesIds } from "../../redux/selectors";
+import { getThemeBorder } from "../../theme";
 import Sticky from "react-sticky-el";
 import WidgetSubmit from "./WidgetSubmit";
 import WidgetRecomendationButton from "./WidgetRecomendationButton";

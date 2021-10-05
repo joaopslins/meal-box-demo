@@ -1,11 +1,11 @@
 import React from "react";
-import { useAppSelector } from "../redux/hooks";
-import { selectMealById } from "../redux/selectors";
-import MealButtons from "./MealButtons";
+import { useAppSelector } from "../../redux/hooks";
+import { selectMealById } from "../../redux/selectors";
+import MealButtons from "../shared/MealButtons";
 import styled from "styled-components";
-import Image from "./Image";
-import MealRater from "./MealRater";
-import { getThemeBorder } from "../theme";
+import Image from "../shared/Image";
+import MealRater from "../shared/MealRater";
+import { getThemeBorder } from "../../theme";
 
 const Container = styled.div`
   box-shadow: 0 0 5px 1px rgba(34, 34, 34, 0.4);

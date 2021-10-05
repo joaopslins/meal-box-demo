@@ -1,10 +1,10 @@
 import React from "react";
-import { useAppSelector } from "../redux/hooks";
-import { selectCategoryById } from "../redux/selectors";
+import { useAppSelector } from "../../redux/hooks";
+import { selectCategoryById } from "../../redux/selectors";
 import styled from "styled-components";
-import { CategoryProvider } from "../redux/categoryContext";
+import { CategoryProvider } from "../../redux/categoryContext";
 import MealCard from "./MealCard";
-import { getThemeBorder } from "../theme";
+import { getThemeBorder } from "../../theme";
 
 const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.primary600};

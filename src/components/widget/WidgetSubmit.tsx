@@ -1,6 +1,6 @@
 import React from "react";
-import { useBoxInfo } from "../redux/hooks";
-import { BlockButton } from "./BaseButton";
+import { useBoxInfo } from "../../redux/hooks";
+import { BlockButton } from "../shared/BaseButton";
 
 const WidgetSubmit = () => {
   const { selectedQuantity, totalQuantity } = useBoxInfo();

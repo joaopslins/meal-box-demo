@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useMealActions, useMealInfo } from "../redux/hooks";
+import { useMealActions, useMealInfo } from "../../redux/hooks";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import BaseButton from "./BaseButton";
 

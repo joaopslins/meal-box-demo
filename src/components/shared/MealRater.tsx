@@ -1,6 +1,6 @@
 import React from "react";
 import ReactStars from "react-stars";
-import { useMealRater } from "../redux/hooks";
+import { useMealRater } from "../../redux/hooks";
 import { useTheme } from "styled-components";
 
 interface Props {

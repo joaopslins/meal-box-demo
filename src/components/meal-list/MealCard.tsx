@@ -1,10 +1,11 @@
 import React from "react";
-import { useAppSelector } from "../redux/hooks";
-import { selectMealById } from "../redux/selectors";
+import { useAppSelector } from "../../redux/hooks";
+import { selectMealById } from "../../redux/selectors";
 import styled from "styled-components";
-import MealButtons from "./MealButtons";
-import Image from "./Image";
-import MealRater from "./MealRater";
+import MealButtons from "../shared/MealButtons";
+import Image from "../shared/Image";
+import MealRater from "../shared/MealRater";
+import { Link } from "react-router-dom";
 
 const Card = styled.div`
   width: 140px;
@@ -23,11 +24,18 @@ const Body = styled.div`
   flex: 1;
 `;
 
-const Title = styled.div`
+const Title = styled(Link)`
   color: ${({ theme }) => theme.colors.secondary600};
   text-align: center;
   font-weight: 500;
   flex: 1;
+  text-decoration: none;
+
+  :hover,
+  :focus {
+    color: ${({ theme }) => theme.colors.secondary400};
+    text-decoration: underline;
+  }
 `;
 
 interface Props {
@@ -42,7 +50,7 @@ const MealCard = ({ id }: Props) => {
       <Image size={140} url={meal.image} />
       <MealButtons mealId={id} />
       <Body>
-        <Title>{meal.name}</Title>
+        <Title to={`/detail/${id}`}>{meal.name}</Title>
         <MealRater mealId={id} size={20} />
       </Body>
     </Card>

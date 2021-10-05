@@ -1,7 +1,7 @@
 import React from "react";
-import { BlockButton } from "./BaseButton";
-import { applyRecomendation } from "../redux/slice";
-import { useAppDispatch } from "../redux/hooks";
+import { BlockButton } from "../shared/BaseButton";
+import { applyRecomendation } from "../../redux/slice";
+import { useAppDispatch } from "../../redux/hooks";
 
 const WidgetRecomendationButton = () => {
   const dispatch = useAppDispatch();

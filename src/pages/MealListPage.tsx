@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppSelector } from "../redux/hooks";
-import CategorySection from "../components/CategorySection";
+import CategorySection from "../components/meal-list/CategorySection";
 import { selectCategoriesIds } from "../redux/selectors";
 import styled from "styled-components";
 

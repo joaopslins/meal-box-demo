@@ -3,8 +3,9 @@ import MealListPage from "./MealListPage";
 import { Route } from "react-router-dom";
 import { useAppDispatch } from "../redux/hooks";
 import { fetchCategories, fetchPlan } from "../redux/slice";
-import WidgetBox from "../components/WidgetBox";
+import WidgetBox from "../components/widget/WidgetBox";
 import styled from "styled-components";
+import MealDetailPage from "./MealDetailPage";
 
 const Container = styled.div`
   display: flex;
@@ -26,6 +27,9 @@ const Routes = () => {
   return (
     <Container>
       <RouteContainer>
+        <Route path="/detail/:id" exact>
+          <MealDetailPage />
+        </Route>
         <Route path="/" exact>
           <MealListPage />
         </Route>

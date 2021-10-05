@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { getThemeBorder } from "../theme";
+import { getThemeBorder } from "../../theme";
 
 const BaseButton = styled.button`
   border: 0;
