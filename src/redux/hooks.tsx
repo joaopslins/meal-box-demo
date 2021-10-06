@@ -1,5 +1,5 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "./store";
+import { AppDispatch, RootState } from "./store";
 import { useCategoryContext } from "./categoryContext";
 import { decrementMeal, incrementMeal, rateMeal } from "./slice";
 import {
@@ -94,11 +94,6 @@ export const useBoxInfo = () => {
 };
 
 export const useCategoryBoxInfo = (categoryId: number) => {
-  // Memoized since this is used by multiple instances
-  const memoSelectUniqueMealsByCategory = useMemoSelector(
-    factorySelectUniqueMealsByCategory
-  );
-
   const currentMealQuantity = useAppSelector(state =>
     selectBoxMealsByCategory(state, { categoryId })
   ).length;
@@ -106,9 +101,17 @@ export const useCategoryBoxInfo = (categoryId: number) => {
     selectPlanCapByCategory(state, { categoryId })
   );
 
-  const uniqueMeals = useAppSelector(state =>
-    memoSelectUniqueMealsByCategory(state, { categoryId })
+  return { currentMealQuantity, totalMealQuantity };
+};
+
+export const useCategoryUniqueMeals = (categoryId: number) => {
+  // Memoized since this is used by multiple instances
+  const memoSelectUniqueMealsByCategory = useMemoSelector(
+    factorySelectUniqueMealsByCategory
   );
 
-  return { currentMealQuantity, totalMealQuantity, uniqueMeals };
+  return useAppSelector(
+    state => memoSelectUniqueMealsByCategory(state, { categoryId }),
+    (a, b) => a.length === b.length && a.every((val, index) => val === b[index])
+  );
 };
