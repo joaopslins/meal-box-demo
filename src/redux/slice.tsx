@@ -62,13 +62,13 @@ export const slice = createSlice({
       state.ui.box[action.payload.categoryId].push(action.payload.mealId);
     },
     decrementMeal: (state, action: PayloadAction<MealActionPayload>) => {
-      const firstIndex = state.ui.box[action.payload.categoryId].indexOf(
+      const lastIndex = state.ui.box[action.payload.categoryId].lastIndexOf(
         action.payload.mealId
       );
 
-      if (firstIndex === -1) return;
+      if (lastIndex === -1) return;
 
-      state.ui.box[action.payload.categoryId].splice(firstIndex, 1);
+      state.ui.box[action.payload.categoryId].splice(lastIndex, 1);
     },
     rateMeal: (state, action: PayloadAction<MealRatePayload>) => {
       state.entities.meals[action.payload.mealId].rating =
